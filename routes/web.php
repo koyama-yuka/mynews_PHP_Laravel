@@ -15,10 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+    Route::post('news/create', 'Admin\NewsController@create');
     Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
+    Route::post('profile/create','Admin\ProfileController@create');
     Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
 });
 
 /*09-3. 「http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください*/
