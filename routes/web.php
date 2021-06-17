@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('news/create', 'Admin\NewsController@add');
-    Route::get('profile/create','Admin\ProfileController@add');
-    Route::get('profile/edit','Admin\ProfileController@edit');
+    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+    Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
+    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
 });
 
 /*09-3. 「http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください*/
@@ -30,3 +30,7 @@ web.phpを編集して、admin/profile/create にアクセスしたら ProfileCo
 admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください*/
 
 //→20、21行目に追加
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
