@@ -33,12 +33,33 @@ class ProfileController extends Controller
     }
     
     // edit Action
-    public function edit(){
-        return view('admin.profile.edit');
+    public function edit(Request $request){
+        $profiles = Profile::find($request->id);
+        if (empty($profiles)){
+            abort(404);
+        }
+        return view('admin.profile.edit', ['profile_form' => $profiles]);
     }
     
     // update Action
-    public function update(){
-        return redirect('admin/profile/edit');
+    public function update(Request $request){
+        
+        //validationをかける
+        $this->validate($request, Profile::$rules);
+        
+        //Profile Modelからデータ取得
+        $profiles = Profile::find($request->id);
+        
+        //送信されてきたフォームデータを格納
+        $profile_form = $request->all();
+        
+        unset($profile_form['_token']);
+        
+        //上書き保存
+        $profiles->fill($profile_form)->save();
+        
+        $id = $profile_form['id'];
+
+        return redirect('admin/profile/edit?id='.$profile_form['id']); //更新したプロフィールの画面に戻ってくる
     }
 }

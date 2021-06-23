@@ -16,14 +16,21 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth'); //getメソッド Admin\NewsControllerのadd Actionに渡す
+    Route::get('news/create', 'Admin\NewsController@add'); //getメソッド Admin\NewsControllerのadd Actionに渡す
     Route::post('news/create', 'Admin\NewsController@create'); //postメソッド　Admin\NewsControllerのcreate Actionに渡す
     
-    Route::get('profile/create','Admin\ProfileController@add')->middleware('auth'); //getメソッド　Admin\ProfileControllerのadd Actionに渡す
+    Route::get('profile/create','Admin\ProfileController@add'); //getメソッド　Admin\ProfileControllerのadd Actionに渡す
     Route::post('profile/create','Admin\ProfileController@create'); //postメソッド　Admin\ProfileControllerのcreate Actionに渡す
     
-    Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth'); //getメソッド　Admin\ProfileControllerのedit Actionに渡す
+    Route::get('profile/edit','Admin\ProfileController@edit'); //getメソッド　Admin\ProfileControllerのedit Actionに渡す
     Route::post('profile/edit', 'Admin\ProfileController@update'); //postメソッド　Admin\ProfileControllerのupdate Actionに渡す
+    
+    Route::get('news', 'Admin\NewsController@index'); //getメソッド　Admin\NewsControllerのindex Actionに渡す
+    
+    Route::get('news/edit', 'Admin\NewsController@edit'); //getメソッド　Admin\NewsControllerのedit Actionに渡す
+    Route::post('news/edit', 'Admin\NewsController@update'); //postメソッド　Admin\NewsControllerのupdate Actionに渡す
+    
+    Route::get('news/delete', 'Admin\NewsController@delete'); //getメソッド　Admin\NewsControllerのdelete Actionに渡す
 });
 
 /*09-3. 「http://XXXXXX.jp/XXX というアクセスが来たときに、 AAAControllerのbbbというAction に渡すRoutingの設定」を書いてみてください*/
