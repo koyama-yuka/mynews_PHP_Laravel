@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\News; //Model
+use App\History; //Model
+
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -102,7 +105,13 @@ class NewsController extends Controller
         //該当するデータを上書きして保存
         $news->fill($news_form)->save();
         
-        return redirect('admin/news');
+        $history = new History;
+        $history->profile_id = 0; //news_idと重複しないために0代入
+        $history->news_id = $news->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+        
+        return redirect('admin/news/');
     }
     
     
