@@ -69,6 +69,7 @@ class NewsController extends Controller
         
         //News Modelからデータを取得
         $news = News::find($request->id);
+        
         if (empty($news)){
             abort(404);
         }

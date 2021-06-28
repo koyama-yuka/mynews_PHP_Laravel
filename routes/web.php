@@ -46,3 +46,7 @@ admin/profile/edit にアクセスしたら ProfileController の edit Action �
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'NewsController@index');
+
+Route::get('/profile', 'ProfileController@index');
