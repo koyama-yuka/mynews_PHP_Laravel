@@ -30,7 +30,7 @@
         </div>
     @endif
     
-    <hr color="#c0c0c0">
+    <hr color="#66CCFF"> {{-- デプロイ課題、 Viewの変更について、色変更 --}}
     <div class="row">
         <div class="posts col-md-8 mx-auto mt-3">
             @foreach ($posts as $post)
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <hr collor="#c0c0c0">
+                <hr color="#66CCFF"> {{-- 色変更 --}}
             @endforeach
         </div>
     </div>
